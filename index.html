@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="container" role="main">
+        <header>
+            <h1 aria-label="Lista de Afazeres"> To-do List</h1>
+        </header>
+        <form class="input-group" autocomplete="off">
+            <label for="taskInput" class="visually-hidden">Nova tarefa</label>
+            <input id="taskInput" type="text" placeholder="Digite uma tarefa..." aria-label="Digite uma tarefa" />
+            <button id="addTaskBtn" type="submit"><span>Adicionar</span></button>
+        </form>
+        <section aria-label="Lista de tarefas">
+            <ul id="taskList"></ul>
+        </section>
+    </main>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
