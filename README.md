@@ -62,7 +62,9 @@ npm install
 Você pode rodar o projeto de duas formas:
 
 **1. Abrindo o arquivo `index.html` no navegador**  
+```bash
 Basta abrir o arquivo manualmente ou usar uma extensão como Live Server no VS Code.
+```
 
 **2. Pelo terminal, usando o comando:**
 ```bash
