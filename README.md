@@ -62,8 +62,8 @@ Basta abrir o arquivo `index.html` em um navegador,
 ou utilizar uma extensão como Live Server no VS Code para melhor experiência.
 
 ```bash
-# Caso use o Live Server no VS Code:
-# Clique com o botão direito no "index.html" → "Open with Live Server"
+Caso use o Live Server no VS Code:
+Clique com o botão direito no "index.html" → "Open with Live Server"
 ```
 
 ### Gerar build
