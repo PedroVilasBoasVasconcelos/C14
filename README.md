@@ -58,13 +58,18 @@ npm install
 ## 🛠️ Execução e Build
 
 ### Executar localmente
-Basta abrir o arquivo `index.html` em um navegador,  
-ou utilizar uma extensão como Live Server no VS Code para melhor experiência.
 
+Você pode rodar o projeto de duas formas:
+
+**1. Abrindo o arquivo `index.html` no navegador**  
+Basta abrir o arquivo manualmente ou usar uma extensão como Live Server no VS Code.
+
+**2. Pelo terminal, usando o comando:**
 ```bash
-Caso use o Live Server no VS Code:
-Clique com o botão direito no "index.html" → "Open with Live Server"
+npm run start
 ```
+Isso irá iniciar o projeto automaticamente no navegador (caso você tenha configurado um script `start` no `package.json`).
+---
 
 ### Gerar build
 Neste projeto simples, o build consiste apenas em garantir que as dependências estejam instaladas:
