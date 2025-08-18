@@ -6,14 +6,16 @@ O objetivo é demonstrar o uso de **gerenciamento de dependências com Node.js**
 ---
 
 ## 🚀 Funcionalidades
-- ✅ Adicionar novas tarefas  
-- ✏️ Marcar tarefas como concluídas  
-- ❌ Remover tarefas  
-- 🎨 Interface simples, responsiva e intuitiva  
+
+-   ✅ Adicionar novas tarefas
+-   ✏️ Marcar tarefas como concluídas
+-   ❌ Remover tarefas
+-   🎨 Interface simples, responsiva e intuitiva
 
 ---
 
 ## 📂 Estrutura do Projeto
+
 ```
 TODO-WEB/
 │-- index.html         # Estrutura principal da aplicação
@@ -31,11 +33,14 @@ TODO-WEB/
 ## ⚙️ Configuração do Ambiente
 
 ### 🔹 Pré-requisitos
+
 Antes de começar, verifique se você tem instalado:
-- [Node.js](https://nodejs.org/) (versão LTS recomendada)  
-- [npm](https://www.npmjs.com/) (vem junto com o Node.js)  
+
+-   [Node.js](https://nodejs.org/) (versão LTS recomendada)
+-   [npm](https://www.npmjs.com/) (vem junto com o Node.js)
 
 Para confirmar, execute no terminal:
+
 ```bash
 node -v
 npm -v
@@ -61,24 +66,28 @@ npm install
 
 Você pode rodar o projeto de duas formas:
 
-**1. Abrindo o arquivo `index.html` no navegador**  
+**1. Abrindo o arquivo `index.html` no navegador**
+
 ```bash
 Basta abrir o arquivo manualmente ou usar uma extensão como Live Server no VS Code.
 ```
 
 **2. Pelo terminal, usando o comando:**
+
 ```bash
 npm run start
 ```
-Isso irá iniciar o projeto automaticamente no navegador (caso você tenha configurado um script `start` no `package.json`).
----
+
+## Isso irá iniciar o projeto automaticamente no navegador (caso você tenha configurado um script `start` no `package.json`).
 
 ### Gerar build
+
 Neste projeto simples, o build consiste apenas em garantir que as dependências estejam instaladas:
 
 ```bash
 npm install
 ```
+
 (Em projetos mais complexos, poderia ser configurado um bundler como Vite, Webpack ou Parcel.)
 
 ---
@@ -87,9 +96,9 @@ npm install
 
 Exemplo de como a aplicação funciona:
 
-- Adicionar uma nova tarefa
-- Marcar como concluída
-- Remover quando não for mais necessária
+-   Adicionar uma nova tarefa
+-   Marcar como concluída
+-   Remover quando não for mais necessária
 
 💡 Aqui você pode inserir prints da aplicação rodando (por exemplo: docs/screenshot1.png, docs/screenshot2.png).
 
@@ -97,5 +106,5 @@ Exemplo de como a aplicação funciona:
 
 ## 👨‍💻 Autor
 
-Projeto desenvolvido por Pedro Vilas Boas Vasconcelos  
+Projeto desenvolvido por Pedro Vilas  
 📚 Engenharia de Software – INATEL
