@@ -11,22 +11,33 @@ function renderTasks() {
   tasks.forEach((task) => {
     const li = document.createElement("li");
     li.textContent = task.text;
+    li.className = task.completed ? "completed" : "";
+
+    // Alterna status de concluído ao clicar no texto
+    li.onclick = (e) => {
+      if (e.target.tagName !== "BUTTON") { // evita conflito com botão de deletar
+        task.completed = !task.completed;
+        renderTasks();
+      }
+    };
 
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "🗑️";
     removeBtn.className = "delete-btn";
-    removeBtn.onclick = () => {
+    removeBtn.onclick = (event) => {
+      event.stopPropagation(); // evita marcar como concluído ao deletar
       li.classList.add("removing");
       setTimeout(() => {
         tasks = tasks.filter((t) => t.id !== task.id);
         renderTasks();
-      }, 400); // tempo igual ao CSS .removing
+      }, 400);
     };
 
     li.appendChild(removeBtn);
     taskList.appendChild(li);
   });
 }
+
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
