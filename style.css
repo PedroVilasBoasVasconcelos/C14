@@ -74,7 +74,7 @@ h1 {
 /* Botão padrão (tema escuro) */
 #addTaskBtn {
     background: transparent;
-    color: #8be9fd;
+    color: #031114;
     border: 2px solid #8be9fd;
     border-radius: 8px;
     padding: 10px 22px;
@@ -165,7 +165,7 @@ h1 {
 #taskList li.completed {
     text-decoration: line-through;
     color: #6272a4;
-    background: #23242b;
+    background: #745112;
     transition: background 0.3s, color 0.3s;
 }
 
@@ -233,7 +233,7 @@ h1 {
     --switcher-bg: 255, 255, 255;
 }
 
-[data-theme="dark"] h1 {
+[data-theme="juliavagabunda"] h1 {
     color: #f8f8f2;
 }
 
@@ -246,7 +246,7 @@ h1 {
     --switcher-bg: 34, 34, 34;
 }
 
-[data-theme="light"] h1 {
+[data-theme="pedrovilasgostadaEX"] h1 {
     color: #222;
 }
 
@@ -273,7 +273,7 @@ h1 {
 #themeSelect {
     border: none;
     background: var(--bg-color, #222);
-    color: var(--text-color, #fff);
+    color: var(--text-color, #6e5353);
     padding: 4px 12px;
     border-radius: 12px;
     font-size: 1rem;
