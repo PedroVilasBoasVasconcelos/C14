@@ -17,6 +17,11 @@ body {
     animation: fadeIn 0.8s;
 }
 
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+    transition: 0.4s;
+}
 
 @keyframes fadeIn {
     from {
