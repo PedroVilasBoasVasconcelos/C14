@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
-    "build": "vite build"
+    "start": "serve .",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "vite": "^5.0.0"
+    "jest": "^30.1.2",
+    "serve": "^14.2.0"
   }
 }
