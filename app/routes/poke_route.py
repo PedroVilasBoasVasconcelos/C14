@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Query
-from app.modeles.pokemodel import Pokemon
+from app.modeles.poke_model import Pokemon
 from app.services.poke_service import PokeService
 
 router = APIRouter(

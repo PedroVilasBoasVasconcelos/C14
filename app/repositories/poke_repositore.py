@@ -1,5 +1,5 @@
 from app.config.dbconfig import get_database
-from app.modeles.pokemodel import Pokemon
+from app.modeles.poke_model import Pokemon
 
 class PokemonRepository:
     
