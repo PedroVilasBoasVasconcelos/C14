@@ -1,8 +1,10 @@
 import pytest
-from app.models.pokemodel import Name, BaseStats, Pokemon
-from app.repositories.pokerepository import PokemonRepository
-from app.services.poke_service import PokeService
 import mongomock
+
+from app.modeles.poke_model import Name, BaseStats, Pokemon
+from app.repositories.poke_repositore import PokemonRepository
+from app.services.poke_service import PokeService
+
 
 # Mock do banco
 @pytest.fixture
