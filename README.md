@@ -1,110 +1,179 @@
-# 📝 To-do List Web
+# Pokedex API
 
-Uma aplicação simples de lista de tarefas (To-do List) desenvolvida em **HTML, CSS e JavaScript**.  
-O objetivo é demonstrar o uso de **gerenciamento de dependências com Node.js** e **automação de build**, conforme proposto no exercício prático da disciplina **Engenharia de Software (C14)**.
-
----
-
-## 🚀 Funcionalidades
-
--   ✅ Adicionar novas tarefas
--   ✏️ Marcar tarefas como concluídas
--   ❌ Remover tarefas
--   🎨 Interface simples, responsiva e intuitiva
+Uma API RESTful desenvolvida em **FastAPI** para consultar, criar, atualizar e deletar Pokémons, utilizando **MongoDB** como banco de dados. O projeto está dockerizado e utiliza **Pipenv** para gerenciamento de dependências.
 
 ---
 
-## 📂 Estrutura do Projeto
+## 🗂 Estrutura do Projeto
 
 ```
-TODO-WEB/
-│-- index.html         # Estrutura principal da aplicação
-│-- style.css          # Estilos da página
-│-- main.js            # Lógica da aplicação
-│-- package.json       # Configuração do projeto e dependências
-│-- package-lock.json
-│-- node_modules/      # Dependências instaladas (ignorado no Git)
-│-- .gitignore         # Arquivo para ignorar itens irrelevantes
-│-- README.md          # Documentação do projeto
+C14/
+│
+├── .gitignore
+├── Pipfile
+├── Pipfile.lock
+├── README.md
+├── Dockerfile
+├── compose.yaml
+├── Makefile
+│
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── config/dbconfig.py
+│   ├── models/pokemodel.py
+│   ├── repositories/pokerepository.py
+│   ├── routes/pokeroute.py
+│   └── services/poke_service.py
+│
+└── data/pokedex.json
 ```
 
 ---
 
-## ⚙️ Configuração do Ambiente
+## ⚡ Tecnologias
 
-### 🔹 Pré-requisitos
+- Python 3.12
+- FastAPI
+- MongoDB
+- Pipenv
+- Docker & Docker Compose
+- Uvicorn
 
-Antes de começar, verifique se você tem instalado:
+---
 
--   [Node.js](https://nodejs.org/) (versão LTS recomendada)
--   [npm](https://www.npmjs.com/) (vem junto com o Node.js)
+## 🖼 Arquitetura da API
 
-Para confirmar, execute no terminal:
+```
++-----------------+           +--------------------+
+|                 |  REST API |                    |
+|  Cliente (Postman| <------> |  FastAPI (app.main)|
+|   ou Front-end) |           |                    |
++-----------------+           +--------------------+
+                                     |
+                                     v
+                          +---------------------+
+                          | PokeService         |
+                          | - lógica de negócios|
+                          +---------------------+
+                                     |
+                                     v
+                          +---------------------+
+                          | PokemonRepository   |
+                          | - acesso ao MongoDB |
+                          +---------------------+
+                                     |
+                                     v
+                          +---------------------+
+                          | MongoDB (pokedex)   |
+                          +---------------------+
+```
+
+---
+
+## 🐳 Rodando com Docker
+
+1. **Clone o projeto**
 
 ```bash
-node -v
-npm -v
+git clone <URL_DO_SEU_REPOSITORIO>
+cd C14
+```
+
+2. **Suba os containers com Docker Compose**
+
+```bash
+make run
+```
+
+> Isso vai iniciar o MongoDB e a API na porta `8000`.
+
+3. **Acesse a API**
+
+- Documentação interativa (Swagger): [http://localhost:8000/docs](http://localhost:8000/docs)
+- Redoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+
+---
+
+## ⚙️ Variáveis de Ambiente
+
+O projeto utiliza a variável de ambiente:
+
+```
+MONGODB_URI=mongodb://mongo:27017/
+```
+
+Ela já está configurada no `compose.yaml`. Se rodar localmente, você pode criar um arquivo `.env` com:
+
+```
+MONGODB_URI=mongodb://localhost:27017/
 ```
 
 ---
 
-## 📦 Instalação de Dependências
+## 🚀 Rotas da API
 
-Clone o repositório e instale as dependências:
+| Método | Endpoint               | Descrição                                  |
+| ------ | ---------------------- | ------------------------------------------ |
+| GET    | `/`                    | Mensagem de boas-vindas                    |
+| GET    | `/pokemon/name/{name}` | Retorna Pokémon pelo nome                  |
+| GET    | `/pokemon/{id}`        | Retorna Pokémon pelo ID                    |
+| GET    | `/pokemon/type/{type}` | Retorna Pokémons pelo tipo (com paginação) |
+| POST   | `/pokemon/`            | Cria um novo Pokémon                       |
+| PUT    | `/pokemon/{id}`        | Atualiza um Pokémon existente              |
+| DELETE | `/pokemon/{id}`        | Deleta um Pokémon existente                |
 
-```bash
-git clone https://github.com/seu-usuario/todo-web.git
-cd todo-web
-npm install
+**Exemplo de retorno:**
+
+```json
+{
+  "id": 1,
+  "name": {
+    "english": "Bulbasaur",
+    "japanese": "フシギダネ",
+    "chinese": "妙蛙种子",
+    "french": "Bulbizarre"
+  },
+  "type": ["Grass", "Poison"],
+  "base": {
+    "HP": 45,
+    "Attack": 49,
+    "Defense": 49,
+    "Sp. Attack": 65,
+    "Sp. Defense": 65,
+    "Speed": 45
+  }
+}
 ```
 
 ---
 
-## 🛠️ Execução e Build
+## 🛠 Rodando local sem Docker
 
-### Executar localmente
-
-Você pode rodar o projeto de duas formas:
-
-**1. Abrindo o arquivo `index.html` no navegador**
+1. Instale dependências com Pipenv:
 
 ```bash
-Basta abrir o arquivo manualmente ou usar uma extensão como Live Server no VS Code.
+pip install pipenv
+pipenv install --dev
+pipenv shell
 ```
 
-**2. Pelo terminal, usando o comando:**
+2. Execute a API:
 
 ```bash
-npm run start
+uvicorn app.main:app --reload
 ```
-
-## Isso irá iniciar o projeto automaticamente no navegador (caso você tenha configurado um script `start` no `package.json`).
-
-### Gerar build
-
-Neste projeto simples, o build consiste apenas em garantir que as dependências estejam instaladas:
-
-```bash
-npm install
-```
-
-(Em projetos mais complexos, poderia ser configurado um bundler como Vite, Webpack ou Parcel.)
 
 ---
 
-## 📸 Exemplo da Interface
+## 📝 Observações
 
-Exemplo de como a aplicação funciona:
-
--   Adicionar uma nova tarefa
--   Marcar como concluída
--   Remover quando não for mais necessária
-
-💡 Aqui você pode inserir prints da aplicação rodando (por exemplo: docs/screenshot1.png, docs/screenshot2.png).
+- Certifique-se de que o MongoDB esteja rodando.
+- O arquivo `data/pokedex.json` contém os dados estáticos iniciais.
+- A API faz validação com **Pydantic** e retorna erros HTTP quando algo não é encontrado ou inválido.
 
 ---
 
 ## 👨‍💻 Autor
 
-Projeto desenvolvido por Pedro Vilas  
-📚 Engenharia de Software – INATEL
+Pedro Vilas Boas Vasconcelos

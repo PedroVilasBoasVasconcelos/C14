@@ -1,0 +1,14 @@
+[[source]] 
+name = "pypi" 
+url = "https://pypi.org/simple" 
+verify_ssl = true 
+
+[packages] 
+fastapi = {version = "==0.115.8", extras = ["standard"]} 
+pymongo = "==4.11.1" 
+uvicorn = "==0.34.0" 
+
+[dev-packages] 
+
+[requires] 
+python_version = "3.12.5"
