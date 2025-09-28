@@ -1,179 +1,122 @@
-# Pokedex API
+# PokemonAPI
 
-Uma API RESTful desenvolvida em **FastAPI** para consultar, criar, atualizar e deletar Pokémons, utilizando **MongoDB** como banco de dados. O projeto está dockerizado e utiliza **Pipenv** para gerenciamento de dependências.
-
----
-
-## 🗂 Estrutura do Projeto
-
-```
-C14/
-│
-├── .gitignore
-├── Pipfile
-├── Pipfile.lock
-├── README.md
-├── Dockerfile
-├── compose.yaml
-├── Makefile
-│
-├── app/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── config/dbconfig.py
-│   ├── models/pokemodel.py
-│   ├── repositories/pokerepository.py
-│   ├── routes/pokeroute.py
-│   └── services/poke_service.py
-│
-└── data/pokedex.json
-```
+Uma API em Flask para consulta de informações de Pokémons, utilizando MongoDB como banco de dados.
 
 ---
 
-## ⚡ Tecnologias
+## 🚀 Tecnologias utilizadas
 
-- Python 3.12
-- FastAPI
+- Python 3.12+
+- Flask
 - MongoDB
-- Pipenv
-- Docker & Docker Compose
-- Uvicorn
+- Docker
+- Pytest
 
 ---
 
-## 🖼 Arquitetura da API
+## 📦 Instalação
 
+Clone o repositório:
+
+```bash
+git clone https://github.com/seu-usuario/PokemonAPI.git
+cd PokemonAPI
 ```
-+-----------------+           +--------------------+
-|                 |  REST API |                    |
-|  Cliente (Postman| <------> |  FastAPI (app.main)|
-|   ou Front-end) |           |                    |
-+-----------------+           +--------------------+
-                                     |
-                                     v
-                          +---------------------+
-                          | PokeService         |
-                          | - lógica de negócios|
-                          +---------------------+
-                                     |
-                                     v
-                          +---------------------+
-                          | PokemonRepository   |
-                          | - acesso ao MongoDB |
-                          +---------------------+
-                                     |
-                                     v
-                          +---------------------+
-                          | MongoDB (pokedex)   |
-                          +---------------------+
+
+Crie o ambiente virtual e instale as dependências:
+
+```bash
+pip install pipenv
+pipenv install
+```
+
+Ative o ambiente virtual:
+
+```bash
+pipenv shell
 ```
 
 ---
 
 ## 🐳 Rodando com Docker
 
-1. **Clone o projeto**
+Suba os containers com:
 
 ```bash
-git clone <URL_DO_SEU_REPOSITORIO>
-cd C14
+docker compose -f compose.yaml up -d
 ```
 
-2. **Suba os containers com Docker Compose**
+Isso irá iniciar:
 
-```bash
-make run
-```
-
-> Isso vai iniciar o MongoDB e a API na porta `8000`.
-
-3. **Acesse a API**
-
-- Documentação interativa (Swagger): [http://localhost:8000/docs](http://localhost:8000/docs)
-- Redoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+- MongoDB em `localhost:27017`
+- A API em `http://127.0.0.1:5000`
 
 ---
 
-## ⚙️ Variáveis de Ambiente
+## 🗂 Importando os dados para o MongoDB Compass
 
-O projeto utiliza a variável de ambiente:
+O arquivo `pokedex.json` que está na pasta `data/` deve ser importado no MongoDB.
 
-```
-MONGODB_URI=mongodb://mongo:27017/
-```
+1. Abra o **MongoDB Compass**
+2. Crie uma nova conexão com a URI padrão:
 
-Ela já está configurada no `compose.yaml`. Se rodar localmente, você pode criar um arquivo `.env` com:
+   ```
+   mongodb://localhost:27017/
+   ```
 
-```
-MONGODB_URI=mongodb://localhost:27017/
-```
+3. Nomeie a conexão como **PokemonAPI** e conecte.
+4. Crie um banco de dados chamado `pokemon`.
+5. Dentro dele, crie a collection `pokedex`.
+6. Clique em **ADD DATA → Import File** e selecione o arquivo `data/pokedex.json`.
+7. Formato: `JSON`
+8. Confirme a importação ✅
+
+Agora a base de dados está pronta.
 
 ---
 
-## 🚀 Rotas da API
+## ▶️ Executando a API
 
-| Método | Endpoint               | Descrição                                  |
-| ------ | ---------------------- | ------------------------------------------ |
-| GET    | `/`                    | Mensagem de boas-vindas                    |
-| GET    | `/pokemon/name/{name}` | Retorna Pokémon pelo nome                  |
-| GET    | `/pokemon/{id}`        | Retorna Pokémon pelo ID                    |
-| GET    | `/pokemon/type/{type}` | Retorna Pokémons pelo tipo (com paginação) |
-| POST   | `/pokemon/`            | Cria um novo Pokémon                       |
-| PUT    | `/pokemon/{id}`        | Atualiza um Pokémon existente              |
-| DELETE | `/pokemon/{id}`        | Deleta um Pokémon existente                |
+Com o servidor rodando, acesse os endpoints, por exemplo:
 
-**Exemplo de retorno:**
-
-```json
-{
-  "id": 1,
-  "name": {
-    "english": "Bulbasaur",
-    "japanese": "フシギダネ",
-    "chinese": "妙蛙种子",
-    "french": "Bulbizarre"
-  },
-  "type": ["Grass", "Poison"],
-  "base": {
-    "HP": 45,
-    "Attack": 49,
-    "Defense": 49,
-    "Sp. Attack": 65,
-    "Sp. Defense": 65,
-    "Speed": 45
-  }
-}
+```bash
+http://127.0.0.1:5000/pokemon/1
 ```
 
 ---
 
-## 🛠 Rodando local sem Docker
+## 🧪 Rodando os testes
 
-1. Instale dependências com Pipenv:
-
-```bash
-pip install pipenv
-pipenv install --dev
-pipenv shell
-```
-
-2. Execute a API:
+Para rodar os testes automatizados (Pytest), utilize:
 
 ```bash
-uvicorn app.main:app --reload
+pytest -v
 ```
+
+Isso executará todos os testes presentes na pasta `tests/`.
 
 ---
 
-## 📝 Observações
+## 📂 Estrutura do projeto
 
-- Certifique-se de que o MongoDB esteja rodando.
-- O arquivo `data/pokedex.json` contém os dados estáticos iniciais.
-- A API faz validação com **Pydantic** e retorna erros HTTP quando algo não é encontrado ou inválido.
+```
+PokemonAPI/
+│── app/
+│   ├── routes.py
+│   ├── models.py
+│   ├── ...
+│── data/
+│   ├── pokedex.json   <- arquivo a ser importado no MongoDB
+│── tests/
+│   ├── test_api.py
+│── compose.yaml
+│── Pipfile
+│── Pipfile.lock
+│── README.md
+```
 
 ---
 
 ## 👨‍💻 Autor
 
-Pedro Vilas Boas Vasconcelos
+Projeto desenvolvido por Pedro Vilas Boas Vasconcelos.
